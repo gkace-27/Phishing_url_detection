@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Phishing URL Detection</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#312e81);
+
+overflow:hidden;
+
+}
+
+/* Background circles */
+
+body::before{
+
+content:'';
+
+position:absolute;
+
+width:350px;
+height:350px;
+
+background:#3b82f6;
+
+border-radius:50%;
+
+top:-120px;
+left:-120px;
+
+opacity:.25;
+
+filter:blur(50px);
+
+}
+
+body::after{
+
+content:'';
+
+position:absolute;
+
+width:300px;
+height:300px;
+
+background:#8b5cf6;
+
+border-radius:50%;
+
+bottom:-120px;
+right:-120px;
+
+opacity:.25;
+
+filter:blur(50px);
+
+}
+
+.card{
+
+position:relative;
+
+width:480px;
+
+padding:45px;
+
+border-radius:22px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.18);
+
+box-shadow:0 25px 45px rgba(0,0,0,.35);
+
+text-align:center;
+
+animation:fade .8s ease;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+.icon{
+
+width:90px;
+height:90px;
+
+margin:auto;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:38px;
+
+color:white;
+
+margin-bottom:25px;
+
+box-shadow:0 15px 35px rgba(59,130,246,.4);
+
+}
+
+h1{
+
+color:white;
+
+font-size:30px;
+
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+color:#d1d5db;
+
+font-size:15px;
+
+line-height:1.7;
+
+margin-bottom:28px;
+
+}
+
+.inputBox{
+
+position:relative;
+
+margin-bottom:20px;
+
+}
+
+.inputBox i{
+
+position:absolute;
+
+left:18px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+color:#94a3b8;
+
+}
+
+input{
+
+width:100%;
+
+padding:16px 18px 16px 50px;
+
+border:none;
+
+outline:none;
+
+border-radius:14px;
+
+font-size:15px;
+
+background:rgba(255,255,255,.95);
+
+transition:.3s;
+
+}
+
+input:focus{
+
+transform:scale(1.02);
+
+box-shadow:0 0 20px rgba(59,130,246,.4);
+
+}
+
+button{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:14px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+
+transition:.35s;
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 15px 30px rgba(59,130,246,.45);
+
+}
+
+.footer{
+
+margin-top:28px;
+
+font-size:13px;
+
+color:#d1d5db;
+
+}
+
+.footer i{
+
+color:#60a5fa;
+
+margin-right:6px;
+
+}
+
+@media(max-width:550px){
+
+.card{
+
+width:92%;
+padding:35px 25px;
+
+}
+
+h1{
+
+font-size:24px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="icon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<h1>Phishing URL Detection</h1>
+
+<p class="subtitle">
+
+AI-Powered Website Security Scanner.<br>
+
+Detect phishing websites instantly using Machine Learning.
+
+</p>
+
+<form action="/predict" method="POST">
+
+<div class="inputBox">
+
+<i class="fa-solid fa-link"></i>
+
+<input
+
+type="text"
+
+name="url"
+
+placeholder="https://www.example.com"
+
+required
+
+>
+
+</div>
+
+<button type="submit">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+&nbsp; Scan URL
+
+</button>
+
+</form>
+
+<div class="footer">
+
+<i class="fa-solid fa-robot"></i>
+
+Powered by Machine Learning
+
+</div>
+
+</div>
+
+</body>
+</html>
