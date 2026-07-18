@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Detection Result</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+min-height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#312e81);
+
+overflow:hidden;
+
+}
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:350px;
+height:350px;
+
+background:#3b82f6;
+
+border-radius:50%;
+
+top:-120px;
+left:-120px;
+
+filter:blur(80px);
+
+opacity:.25;
+
+}
+
+body::after{
+
+content:"";
+
+position:absolute;
+
+width:320px;
+height:320px;
+
+background:#8b5cf6;
+
+border-radius:50%;
+
+bottom:-120px;
+right:-120px;
+
+filter:blur(80px);
+
+opacity:.25;
+
+}
+
+.card{
+
+position:relative;
+
+width:520px;
+
+padding:40px;
+
+border-radius:24px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.15);
+
+box-shadow:0 25px 50px rgba(0,0,0,.4);
+
+text-align:center;
+
+animation:fade .7s ease;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+.icon{
+
+width:95px;
+height:95px;
+
+margin:auto;
+
+border-radius:50%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:42px;
+
+color:white;
+
+margin-bottom:20px;
+
+}
+
+.safe{
+
+background:linear-gradient(135deg,#10b981,#22c55e);
+
+}
+
+.danger{
+
+background:linear-gradient(135deg,#ef4444,#dc2626);
+
+}
+
+.error{
+
+background:linear-gradient(135deg,#f59e0b,#fbbf24);
+
+}
+
+h1{
+
+color:white;
+
+font-size:30px;
+
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+color:#d1d5db;
+
+font-size:14px;
+
+margin-bottom:25px;
+
+}
+
+.url-card{
+
+background:rgba(255,255,255,.08);
+
+padding:18px;
+
+border-radius:14px;
+
+color:white;
+
+word-break:break-word;
+
+margin-bottom:25px;
+
+}
+
+.url-card span{
+
+display:block;
+
+font-size:13px;
+
+color:#cbd5e1;
+
+margin-bottom:8px;
+
+}
+
+.result{
+
+padding:22px;
+
+border-radius:16px;
+
+margin-bottom:25px;
+
+color:white;
+
+}
+
+.legitimate{
+
+background:rgba(34,197,94,.18);
+
+border:1px solid #22c55e;
+
+}
+
+.phishing{
+
+background:rgba(239,68,68,.18);
+
+border:1px solid #ef4444;
+
+}
+
+.error-box{
+
+background:rgba(245,158,11,.18);
+
+border:1px solid #f59e0b;
+
+color:white;
+
+padding:20px;
+
+border-radius:15px;
+
+margin-bottom:25px;
+
+}
+
+.result h2{
+
+font-size:28px;
+
+margin-bottom:10px;
+
+}
+
+.result p{
+
+font-size:15px;
+
+opacity:.9;
+
+}
+
+.back{
+
+display:inline-block;
+
+text-decoration:none;
+
+padding:14px 28px;
+
+border-radius:12px;
+
+background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+
+color:white;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.back:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 15px 30px rgba(59,130,246,.4);
+
+}
+
+.footer{
+
+margin-top:25px;
+
+font-size:13px;
+
+color:#cbd5e1;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+{% if error %}
+
+<div class="icon error">
+
+<i class="fa-solid fa-circle-exclamation"></i>
+
+</div>
+
+<h1>Error</h1>
+
+<div class="error-box">
+
+{{ error }}
+
+</div>
+
+{% else %}
+
+{% if result=="Legitimate" %}
+
+<div class="icon safe">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<h1>Website is Safe</h1>
+
+<p class="subtitle">
+
+Machine Learning Analysis Completed
+
+</p>
+
+<div class="url-card">
+
+<span>Checked URL</span>
+
+{{ url }}
+
+</div>
+
+<div class="result legitimate">
+
+<h2>✅ Legitimate Website</h2>
+
+<p>
+
+This website appears to be safe and does not exhibit phishing characteristics.
+
+</p>
+
+</div>
+
+{% else %}
+
+<div class="icon danger">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+</div>
+
+<h1>Security Warning</h1>
+
+<p class="subtitle">
+
+Machine Learning Analysis Completed
+
+</p>
+
+<div class="url-card">
+
+<span>Checked URL</span>
+
+{{ url }}
+
+</div>
+
+<div class="result phishing">
+
+<h2>🚨 Phishing Website</h2>
+
+<p>
+
+Warning! This URL shows phishing characteristics. Avoid entering sensitive information.
+
+</p>
+
+</div>
+
+{% endif %}
+
+{% endif %}
+
+<a href="/" class="back">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Scan Another URL
+
+</a>
+
+<div class="footer">
+
+<i class="fa-solid fa-robot"></i>
+
+Powered by Flask • Scikit-learn • Machine Learning
+
+</div>
+
+</div>
+
+</body>
+</html>
